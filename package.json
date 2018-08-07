@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.3",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "recharts": "^1.1.0",
     "redux": "^4.0.0",

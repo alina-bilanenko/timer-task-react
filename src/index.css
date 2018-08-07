@@ -1,5 +1,19 @@
+::-webkit-input-placeholder {
+  text-align:center;
+  color: #1155cc !important;
+  opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+  text-align:center;
+  color: #1155cc !important;
+  opacity: 1 !important;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  color: #1155cc;
+}
+
+:focus {
+  outline: none;
 }
