@@ -1,36 +1,35 @@
-export const COUNT_TIMER = 'COUNT_TIMER';
-export const BUTTON_TEXT = 'BUTTON_TEXT';
-export const TASK_NAME = 'TASK_NAME';
-export const DATE_START = 'DATE_START';
-export const DATE_END = 'DATE_END';
-export const OPEN_MODAL = 'OPEN_MODAL';
+export const timerActions = {
+  COUNT_TIMER: 'COUNT_TIMER',
+  BUTTON_TEXT: 'BUTTON_TEXT',
+  TASK_NAME: 'TASK_NAME',
+  DATE_START: 'DATE_START',
+  DATE_END: 'DATE_END',
+  OPEN_MODAL: 'OPEN_MODAL',
+};
 
-export const countTimer = value => ({
-  type: COUNT_TIMER,
-  count: value,
-});
-
-export const buttonText = value => ({
-  type: BUTTON_TEXT,
-  text: value,
-});
-
-export const taskName = name => ({
-  type: TASK_NAME,
-  name: name,
-});
-
-export const dataStart = date => ({
-  type: DATE_START,
-  date: date,
-});
-
-export const dataEnd = date => ({
-  type: DATE_END,
-  date: date,
-});
-
-export const openModal = bool => ({
-  type: OPEN_MODAL,
-  isOpen: bool,
-});
+export const timer = {
+  countTimer: value => ({
+    type: timerActions.COUNT_TIMER,
+    count: value,
+  }),
+  buttonText: value => ({
+    type: timerActions.BUTTON_TEXT,
+    isStart: value,
+  }),
+  taskName: value => ({
+    type: timerActions.TASK_NAME,
+    name: value,
+  }),
+  dateStart: value => ({
+    type: timerActions.DATE_START,
+    date: value,
+  }),
+  dateEnd: value => ({
+    type: timerActions.DATE_END,
+    date: value,
+  }),
+  openModal: value => ({
+    type: timerActions.OPEN_MODAL,
+    isOpen: value,
+  }),
+};

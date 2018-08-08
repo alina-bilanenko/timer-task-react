@@ -21,15 +21,12 @@ button.button-close {
   left: 90%;
 }
 
-#modal-title {
-  color: #c34164;
-}
-
-#modal h2,
-#modal h3 {
+h2.modal-title-h2,
+h3.modal-title-h3 {
   margin: 20px;
 }
 
-#modal h2 {
+h2.modal-title-h2 {
   margin-top: 10px;
+  color: #c34164;
 }

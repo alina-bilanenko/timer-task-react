@@ -1,38 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import {
-  countTimer,
-  buttonText,
-  taskName,
-  dataStart,
-  dataEnd,
-  openModal,
-} from '../actions/actionTimer';
-import '../css/App.css';
+import { timer } from 'actions/actionTimer';
+import 'css/App.css';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
-import ModalTimer from '../components/Timer';
+import ModalTimer from 'components/Timer';
 
 class App extends Component {
-  onClickStopStart = () => {
-    if (this.props.buttonText === 'STOP' && !this.props.taskName) {
+  onClickStop = () => {
+    if (!this.props.timer.taskName) {
       this.onChangeOpenModal(true);
       return;
     }
 
-    if (this.props.buttonText === 'START') {
-      this.props.setDateStart(moment().format('HH:mm:ss'));
-      this.timer = setInterval(() => {
-        this.props.setTimer(this.props.taskTime.countTimer + 1);
-      }, 1000);
-    } else {
-      clearInterval(this.timer);
-      this.props.setDateEnd(moment().format('HH:mm:ss'));
-      this.props.setTimer(0);
-      this.props.changeTaskName('');
-    }
-    this.props.changeButtonText();
+    clearInterval(this.timerInterval);
+    this.props.setDateEnd(moment().format('HH:mm:ss'));
+    this.props.setTimer(0);
+    this.props.changeTaskName('');
+    this.props.changeButtonText(true);
+  };
+
+  onClickStart = () => {
+    this.props.setDateStart(moment().format('HH:mm:ss'));
+    this.timerInterval = setInterval(() => {
+      this.props.setTimer(this.props.timer.countTimer + 1);
+    }, 1000);
+    this.props.changeButtonText(false);
   };
 
   onChangeTaskName = e => {
@@ -48,17 +41,15 @@ class App extends Component {
   };
 
   render() {
-    const { buttonText, taskTime, taskName, openModal } = this.props;
+    const { timer } = this.props;
 
     return (
       <div className="main-container">
         <Grid container alignItems="center" justify="center" direction="column">
           <ModalTimer
-            buttonText={buttonText}
-            countTimer={taskTime.countTimer}
-            taskName={taskName}
-            openModal={openModal}
-            onClickStopStart={this.onClickStopStart}
+            timer={timer}
+            onClickStop={this.onClickStop}
+            onClickStart={this.onClickStart}
             onChangeTaskName={this.onChangeTaskName}
             onChangeCloseModal={this.onChangeCloseModal}
           />
@@ -68,37 +59,19 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ taskTime, buttonText, taskName, openModal }) => {
+const mapStateToProps = ({ timer }) => {
   return {
-    taskTime,
-    buttonText,
-    taskName,
-    openModal,
+    timer,
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setTimer: newTimer => dispatch(countTimer(newTimer)),
-    changeButtonText: newText => dispatch(buttonText(newText)),
-    changeTaskName: newName => dispatch(taskName(newName)),
-    setDateStart: newDate => dispatch(dataStart(newDate)),
-    setDateEnd: newDate => dispatch(dataEnd(newDate)),
-    handlerOpenModal: isOpen => dispatch(openModal(isOpen)),
-  };
-};
-
-App.propTypes = {
-  openModal: PropTypes.bool,
-  taskTime: PropTypes.object,
-  buttonText: PropTypes.string,
-  taskName: PropTypes.string,
-  setTimer: PropTypes.func,
-  changeButtonText: PropTypes.func,
-  changeTaskName: PropTypes.func,
-  setDateStart: PropTypes.func,
-  setDateEnd: PropTypes.func,
-  handlerOpenModal: PropTypes.func,
+const mapDispatchToProps = {
+  setTimer: timer.countTimer,
+  changeButtonText: timer.buttonText,
+  changeTaskName: timer.taskName,
+  setDateStart: timer.dateStart,
+  setDateEnd: timer.dateEnd,
+  handlerOpenModal: timer.openModal,
 };
 
 export default connect(

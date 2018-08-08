@@ -1,12 +1,14 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+import {
+  Grid,
+  TextField,
+  Button,
+  Paper,
+  Modal,
+  Typography,
+  withStyles,
+} from '@material-ui/core';
 import moment from 'moment/moment';
-import Modal from '@material-ui/core/Modal';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   paper: {
@@ -30,15 +32,18 @@ function getModalStyle() {
 }
 
 const Timer = ({
-  buttonText,
-  countTimer,
-  onClickStopStart,
-  taskName,
+  timer,
+  onClickStop,
+  onClickStart,
   onChangeTaskName,
-  openModal,
   onChangeCloseModal,
   classes,
 }) => {
+  const newTimer = moment(0)
+    .set({ hour: 0, minute: 0, second: 0 })
+    .add(timer.countTimer, 's')
+    .format('HH:mm:ss');
+
   return (
     <Grid item xs={12}>
       <Grid
@@ -53,34 +58,33 @@ const Timer = ({
           id="with-placeholder"
           placeholder="Name of your task"
           margin="normal"
-          value={taskName}
+          value={timer.taskName}
           onChange={onChangeTaskName}
         />
-        <Paper className="timer">
-          {moment(0)
-            .set({ hour: 0, minute: 0, second: 0 })
-            .add(countTimer, 's')
-            .format('HH:mm:ss')}
-        </Paper>
+        <Paper className="timer">{newTimer}</Paper>
         <Button
           size="small"
           variant="outlined"
-          onClick={onClickStopStart}
+          onClick={timer.buttonText ? onClickStart : onClickStop}
           color="inherit"
         >
-          {buttonText}
+          {timer.buttonText ? 'START' : 'STOP'}
         </Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={openModal}
+          open={timer.openModal}
           onClose={onChangeCloseModal}
         >
-          <Paper style={getModalStyle()} className={classes.paper} id="modal">
-            <Typography variant="title" id="modal-title">
+          <Paper style={getModalStyle()} className={classes.paper}>
+            <Typography variant="title" className="modal-title-h2">
               Empty task name
             </Typography>
-            <Typography variant="subheading" id="simple-modal-description">
+            <Typography
+              variant="subheading"
+              id="simple-modal-description"
+              className="modal-title-h3"
+            >
               You are trying close your task without name, enter the title and
               try again!
             </Typography>
