@@ -8,7 +8,7 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { newTimer } from 'functions'
+import { newTimer } from 'functions';
 
 const styles = theme => ({
   paper: {
@@ -39,7 +39,6 @@ const Timer = ({
   onChangeCloseModal,
   classes,
 }) => {
-
   return (
     <Grid item xs={12}>
       <Grid

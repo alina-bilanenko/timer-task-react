@@ -68,3 +68,8 @@ button.button-table {
   background-color: #ffffff;
   margin: 10% auto;
 }
+
+.tasks-chart {
+  overflow-x: auto;
+  overflow-y: hidden;
+}

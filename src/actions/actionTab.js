@@ -1,7 +1,7 @@
 const tabActions = {
   OPEN_TAB_NUMBER: 'OPEN_TAB_NUMBER',
   TASKS_LOG: 'TASKS_LOG',
-  DATA_FOR_CHART: 'DATA_FOR_CHART'
+  DATA_FOR_CHART: 'DATA_FOR_CHART',
 };
 
 export const tab = {

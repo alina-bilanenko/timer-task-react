@@ -1,6 +1,6 @@
-import { initialState } from "reducers/reducer";
+import { initialState } from 'reducers/reducer';
 
-export const tab = (state = initialState, action) => {
+export const tab = (state = initialState.tab, action) => {
   switch (action.type) {
     case 'OPEN_TAB_NUMBER':
       return { ...state, openTabNumber: action.tabNumber };

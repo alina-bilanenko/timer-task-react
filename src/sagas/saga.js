@@ -1,6 +1,6 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
-import { tab } from 'actions/actionTab'
-import { dataForTaskChart } from 'functions'
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { tab } from 'actions/actionTab';
+import { dataForTaskChart } from 'functions';
 
 function* saga() {
   yield takeEvery('TASKS_LOG', dispatchDataForChart);

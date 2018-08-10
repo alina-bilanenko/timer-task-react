@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { timer } from 'actions/actionTimer';
-import { tab } from "actions/actionTab";
+import { tab } from 'actions/actionTab';
 import ModalTimer from 'components/Timer';
-import TabTask from 'components/TabTask/TabTask'
+import TabTask from 'components/TabTask/TabTask';
 import 'css/App.css';
 import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
 
-
-import { newTimer } from 'functions'
-
+import { newTimer, fieldsTasksLog } from 'functions';
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.timer.countTimer) {
+      this.timerInterval = setInterval(() => {
+        this.props.setTimer(this.props.timer.countTimer + 1);
+      }, 1000);
+    }
+  }
 
   onClickStop = () => {
     if (!this.props.timer.taskName) {
@@ -28,7 +33,8 @@ class App extends Component {
   };
 
   onClickStart = () => {
-    this.props.setDateStart(moment());
+    this.props.setDateStart(moment().valueOf());
+
     this.timerInterval = setInterval(() => {
       this.props.setTimer(this.props.timer.countTimer + 1);
     }, 1000);
@@ -49,22 +55,21 @@ class App extends Component {
 
   addTaskLog = () => {
     const { taskName, dateStart, countTimer } = this.props.timer;
-    const dateEnd = moment();
+    const dateEnd = moment().valueOf();
     const newArrElement = {
-      taskName: taskName,
-      dateStart: dateStart.clone(),
-      dateEnd: dateEnd,
-      countTimer: newTimer(countTimer)
+      [fieldsTasksLog.taskName]: taskName,
+      [fieldsTasksLog.dateStart]: dateStart,
+      [fieldsTasksLog.dateEnd]: dateEnd,
+      [fieldsTasksLog.countTimer]: newTimer(countTimer),
     };
-    const newTasksLog  = [...this.props.tab.tasksLog, newArrElement];
+    const newTasksLog = [...this.props.tab.tasksLog, newArrElement];
     this.props.changeTasksLog(newTasksLog);
   };
 
-  deleteTaskLog = (ind) => {
-    const newTasksLog = this.props.tab.tasksLog.filter( (item, i) => {
-        return ind !== i;
-      }
-    );
+  deleteTaskLog = ind => {
+    const newTasksLog = this.props.tab.tasksLog.filter((item, i) => {
+      return ind !== i;
+    });
     this.props.changeTasksLog(newTasksLog);
   };
 
@@ -97,7 +102,7 @@ class App extends Component {
 const mapStateToProps = ({ timer, tab }) => {
   return {
     timer,
-    tab
+    tab,
   };
 };
 
