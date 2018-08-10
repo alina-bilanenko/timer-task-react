@@ -1,15 +1,4 @@
-import moment from 'moment';
-
-const nullTime = moment(0).set({ hour: 0, minute: 0, second: 0 });
-
-const initialState = {
-  countTimer: 0,
-  buttonText: true,
-  taskName: '',
-  dateStart: nullTime,
-  dateEnd: nullTime,
-  openModal: false,
-};
+import { initialState } from "reducers/reducer";
 
 export const timer = (state = initialState, action) => {
   switch (action.type) {
@@ -21,8 +10,6 @@ export const timer = (state = initialState, action) => {
       return { ...state, taskName: action.name };
     case 'DATE_START':
       return { ...state, dateStart: action.date };
-    case 'DATE_END':
-      return { ...state, dateEnd: action.date };
     case 'OPEN_MODAL':
       return { ...state, openModal: action.isOpen };
 

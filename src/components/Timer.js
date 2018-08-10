@@ -8,7 +8,7 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import moment from 'moment/moment';
+import { newTimer } from 'functions'
 
 const styles = theme => ({
   paper: {
@@ -39,10 +39,6 @@ const Timer = ({
   onChangeCloseModal,
   classes,
 }) => {
-  const newTimer = moment(0)
-    .set({ hour: 0, minute: 0, second: 0 })
-    .add(timer.countTimer, 's')
-    .format('HH:mm:ss');
 
   return (
     <Grid item xs={12}>
@@ -61,7 +57,7 @@ const Timer = ({
           value={timer.taskName}
           onChange={onChangeTaskName}
         />
-        <Paper className="timer">{newTimer}</Paper>
+        <Paper className="timer">{newTimer(timer.countTimer)}</Paper>
         <Button
           size="small"
           variant="outlined"

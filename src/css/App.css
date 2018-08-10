@@ -30,3 +30,41 @@ h2.modal-title-h2 {
   margin-top: 10px;
   color: #c34164;
 }
+.tab {
+  width: 100%;
+  margin-top: 5%;
+}
+
+header.tab-header {
+  background-color: #48bdd5;
+  box-shadow: inherit;
+}
+
+button.tab-field-header {
+  max-width: 100%;
+  flex: 1;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+button.tab-field-header > span,
+.MuiTab-label-207 {
+  font-size: 1rem !important;
+}
+
+.row-tasks-log > td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  color: #1155cc;
+}
+
+.row-tasks-log {
+  background-color: #eaf6fe;
+}
+
+button.button-table {
+  background-color: #ffffff;
+  margin: 10% auto;
+}
