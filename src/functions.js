@@ -1,11 +1,5 @@
 import moment from 'moment/moment';
-
-export const fieldsTasksLog = {
-  taskName: 'taskName',
-  dateStart: 'dateStart',
-  dateEnd: 'dateEnd',
-  countTimer: 'countTimer',
-};
+import { fieldsTasksLog } from 'constFields'
 
 export const newTimer = (timer, type = 's') => {
   return moment(0)
@@ -80,13 +74,18 @@ export const dataForTaskChart = tasksLog => {
 };
 
 export const countTransformPersist = ({
-  countTimer,
-  buttonText,
-  dateStart,
-}) => {
+                                        countTimer,
+                                        buttonText,
+                                        dateStart,
+                                      }) => {
   if (!buttonText) {
     return moment
       .duration(moment() - moment(dateStart))
       .seconds();
   } else return countTimer;
 };
+
+export const dateFormat = date => moment(date).format('DD-MM-YYYY HH:mm:ss');
+
+export const isNumeric = n => !isNaN(parseFloat(n)) && isFinite(n);
+

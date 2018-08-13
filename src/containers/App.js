@@ -4,19 +4,24 @@ import { timer } from 'actions/actionTimer';
 import { tab } from 'actions/actionTab';
 import ModalTimer from 'components/Timer';
 import TabTask from 'components/TabTask/TabTask';
-import 'css/App.css';
-import Grid from '@material-ui/core/Grid';
 import moment from 'moment';
-
-import { newTimer, fieldsTasksLog } from 'functions';
+import { fieldsTasksLog } from 'constFields'
+import { newTimer } from 'functions';
+import { withStyles, Grid } from '@material-ui/core';
+import { stylesApp} from "styles";
 
 class App extends Component {
+
   componentDidMount() {
-    if (this.props.timer.countTimer) {
+    if (!this.props.timer.buttonText) {
       this.timerInterval = setInterval(() => {
         this.props.setTimer(this.props.timer.countTimer + 1);
       }, 1000);
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerInterval);
   }
 
   onClickStop = () => {
@@ -66,18 +71,16 @@ class App extends Component {
     this.props.changeTasksLog(newTasksLog);
   };
 
-  deleteTaskLog = ind => {
-    const newTasksLog = this.props.tab.tasksLog.filter((item, i) => {
-      return ind !== i;
-    });
-    this.props.changeTasksLog(newTasksLog);
-  };
 
   render() {
-    const { timer, changeTab, tab } = this.props;
+    const { timer,
+      classes,
+      match,
+      history
+    } = this.props;
 
     return (
-      <div className="main-container">
+      <div className={classes.root}>
         <Grid container alignItems="center" justify="center" direction="column">
           <ModalTimer
             timer={timer}
@@ -87,11 +90,8 @@ class App extends Component {
             onChangeCloseModal={this.onChangeCloseModal}
           />
           <TabTask
-            changeTab={changeTab}
-            openTabNumber={tab.openTabNumber}
-            tasksLog={tab.tasksLog}
-            deleteTaskLog={this.deleteTaskLog}
-            dataForChart={tab.dataForChart}
+            match={match}
+            history={history}
           />
         </Grid>
       </div>
@@ -112,11 +112,10 @@ const mapDispatchToProps = {
   changeTaskName: timer.taskName,
   setDateStart: timer.dateStart,
   handlerOpenModal: timer.openModal,
-  changeTab: tab.openTabNumber,
   changeTasksLog: tab.tasksLog,
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(withStyles(stylesApp)(App));

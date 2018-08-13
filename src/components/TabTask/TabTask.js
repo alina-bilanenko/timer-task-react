@@ -1,40 +1,36 @@
 import React from 'react';
 import TaskLog from 'components/TabTask/TasksLog';
-import { TaskChart } from 'components/TabTask/TasksChart';
-import { withStyles, AppBar, Tabs, Tab } from '@material-ui/core';
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    fontSize: '1rem',
-  },
-});
+import TaskChart from 'components/TabTask/TasksChart';
+import { AppBar, Tabs, Tab, withStyles } from '@material-ui/core';
+import { Route } from 'react-router'
+import { tabs } from 'consts'
+import { stylesTab } from "styles";
 
 const TabTask = props => {
   const handleChange = (event, val) => {
-    props.changeTab(val);
+    props.history.push(`/app/${val}`);
   };
 
+  const tabName = props.match.params.name;
+  const { classes } = props;
+
+  if (!tabName || ![tabs.tasksLog, tabs.tasksChart].includes(tabName)) {
+    props.history.push('/app/tasks-log');
+    return null
+  }
+
   return (
-    <div className="tab">
-      <AppBar position="static" className="tab-header">
-        <Tabs value={props.openTabNumber} onChange={handleChange}>
-          <Tab label="TASKS LOG" className="tab-field-header" />
-          <Tab label="TASKS CHART" className="tab-field-header" />
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.header}>
+        <Tabs value={tabName} onChange={handleChange}>
+          <Tab label="TASKS LOG" className={classes.fieldHeader} value='tasks-log'/>
+          <Tab label="TASKS CHART" className={classes.fieldHeader} value='tasks-chart'/>
         </Tabs>
       </AppBar>
-      {props.openTabNumber === 0 && (
-        <TaskLog
-          tasksLog={props.tasksLog}
-          deleteTaskLog={props.deleteTaskLog}
-        />
-      )}
-      {props.openTabNumber === 1 && (
-        <TaskChart dataForChart={props.dataForChart} />
-      )}
+      <Route exact path='/app/tasks-log' component={TaskLog} />
+      <Route exact path='/app/tasks-chart' component={TaskChart} />
     </div>
   );
 };
 
-export default withStyles(styles)(TabTask);
+export default withStyles(stylesTab)(TabTask);

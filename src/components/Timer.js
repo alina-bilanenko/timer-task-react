@@ -1,4 +1,6 @@
 import React from 'react';
+import { newTimer } from 'functions';
+import { getModalStyle, stylesModalTimer } from 'styles';
 import {
   Grid,
   TextField,
@@ -8,30 +10,8 @@ import {
   Typography,
   withStyles,
 } from '@material-ui/core';
-import { newTimer } from 'functions';
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 100,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 2,
-  },
-});
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const Timer = ({
+const ModalTimer = ({
   timer,
   onClickStop,
   onClickStart,
@@ -49,14 +29,14 @@ const Timer = ({
         spacing={16}
       >
         <TextField
-          className="task-name"
+          className={classes.taskName}
           id="with-placeholder"
           placeholder="Name of your task"
           margin="normal"
           value={timer.taskName}
           onChange={onChangeTaskName}
         />
-        <Paper className="timer">{newTimer(timer.countTimer)}</Paper>
+        <Paper className={classes.timer}>{newTimer(timer.countTimer)}</Paper>
         <Button
           size="small"
           variant="outlined"
@@ -72,13 +52,13 @@ const Timer = ({
           onClose={onChangeCloseModal}
         >
           <Paper style={getModalStyle()} className={classes.paper}>
-            <Typography variant="title" className="modal-title-h2">
+            <Typography variant="title" className={classes.modalTitleH2}>
               Empty task name
             </Typography>
             <Typography
               variant="subheading"
               id="simple-modal-description"
-              className="modal-title-h3"
+              className={classes.modalTitleH3}
             >
               You are trying close your task without name, enter the title and
               try again!
@@ -86,7 +66,7 @@ const Timer = ({
             <Button
               size="medium"
               onClick={onChangeCloseModal}
-              className="button-close"
+              className={classes.buttonClose}
             >
               CLOSE
             </Button>
@@ -97,6 +77,4 @@ const Timer = ({
   );
 };
 
-const ModalTimer = withStyles(styles)(Timer);
-
-export default ModalTimer;
+export default withStyles(stylesModalTimer)(ModalTimer);

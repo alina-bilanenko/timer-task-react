@@ -1,4 +1,10 @@
 import React from 'react';
+import moment from 'moment/moment';
+import { fieldsTasksLog } from 'constFields';
+import {connect} from "react-redux";
+import {tab} from "actions/actionTab";
+import { Link } from 'react-router-dom'
+import { stylesTasksLog } from 'styles';
 import {
   withStyles,
   Table,
@@ -9,25 +15,16 @@ import {
   Paper,
   Button,
 } from '@material-ui/core';
-import moment from 'moment/moment';
-import { fieldsTasksLog } from 'functions';
-
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: 0,
-    overflowX: 'auto',
-    boxShadow: 'inherit',
-    borderRadius: 'inherit',
-  },
-  table: {
-    minWidth: 700,
-    color: '#1155cc',
-  },
-});
 
 const TaskLog = props => {
-  const { classes, tasksLog, deleteTaskLog } = props;
+  const { classes, tasksLog, changeTasksLog } = props;
+
+  const deleteTaskLog = ind => {
+    const newTasksLog = tasksLog.filter((item, i) => {
+      return ind !== i;
+    });
+   changeTasksLog(newTasksLog);
+  };
 
   return (
     <Paper className={classes.root}>
@@ -45,34 +42,35 @@ const TaskLog = props => {
         </TableHead>
         <TableBody>
           {tasksLog.map((item, i) => (
-            <TableRow key={i} className="row-tasks-log" hover>
-              <TableCell>{i + 1}</TableCell>
+            <TableRow key={i} className={classes.rowTasksLog} hover>
+              <TableCell  className={classes.cellTasksLog}>{i + 1}</TableCell>
               {Object.keys(item).map((el, j) => (
-                <TableCell key={j}>
+                <TableCell key={j} className={classes.cellTasksLog}>
                   {el === fieldsTasksLog.dateStart ||
                   el === fieldsTasksLog.dateEnd
                     ? moment(item[el]).format('HH:mm:ss')
                     : item[el]}
                 </TableCell>
               ))}
-              <TableCell>
-                <Button
-                  size="small"
-                  variant="outlined"
-                  //onClick={timer.buttonText ? onClickStart : onClickStop}
-                  color="inherit"
-                  className="button-table"
-                >
-                  INFO
-                </Button>
+              <TableCell  className={classes.cellTasksLog}>
+                <Link to={`/tasks/${i+1}`}>
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    color="inherit"
+                    className={classes.buttonTable}
+                  >
+                    INFO
+                  </Button>
+                </Link>
               </TableCell>
-              <TableCell>
+              <TableCell  className={classes.cellTasksLog}>
                 <Button
                   size="small"
                   variant="outlined"
                   onClick={() => deleteTaskLog(i)}
                   color="inherit"
-                  className="button-table"
+                  className={classes.buttonTable}
                 >
                   DELETE
                 </Button>
@@ -85,4 +83,13 @@ const TaskLog = props => {
   );
 };
 
-export default withStyles(styles)(TaskLog);
+const mapStateToProps = ({ tab: { tasksLog } }) => ({tasksLog});
+
+const mapDispatchToProps = {
+  changeTasksLog: tab.tasksLog,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(stylesTasksLog)(TaskLog));

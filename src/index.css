@@ -17,3 +17,19 @@ body {
 :focus {
   outline: none;
 }
+
+a:-webkit-any-link {
+  text-decoration: none;
+}
+
+a:-webkit-any-link:active {
+  color: inherit;
+}
+
+.MuiTab-label-215 {
+  font-size: 1rem !important;
+}
+
+.MuiInput-input-117 {
+  color: #1155cc !important;
+}

@@ -1,6 +1,4 @@
-import { initialState } from 'reducers/reducer';
-
-export const timer = (state = initialState.timer, action) => {
+export const timer = (state = {}, action) => {
   switch (action.type) {
     case 'COUNT_TIMER':
       return { ...state, countTimer: action.count };

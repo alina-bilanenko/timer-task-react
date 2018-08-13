@@ -1,4 +1,7 @@
 import React from 'react';
+import {connect} from "react-redux";
+import { withStyles } from '@material-ui/core';
+import { stylesTasksChart } from "styles";
 import {
   BarChart,
   Bar,
@@ -9,9 +12,9 @@ import {
   Legend,
 } from 'recharts';
 
-export const TaskChart = ({ dataForChart }) => {
+const TaskChart = ({ dataForChart, classes }) => {
   return (
-    <div className="tasks-chart">
+    <div className={classes.root}>
       <BarChart
         width={1200}
         height={400}
@@ -28,3 +31,9 @@ export const TaskChart = ({ dataForChart }) => {
     </div>
   );
 };
+
+const mapStateToProps = ({ tab: {dataForChart} }) => ({dataForChart});
+
+export default connect(
+  mapStateToProps,
+)(withStyles(stylesTasksChart)(TaskChart));
