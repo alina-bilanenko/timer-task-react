@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment/moment';
 import { fieldsTasksLog } from 'constFields';
-import {connect} from "react-redux";
-import {tab} from "actions/actionTab";
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { tab } from 'actions/actionTab';
+import { Link } from 'react-router-dom';
 import { stylesTasksLog } from 'styles';
 import {
   withStyles,
@@ -23,7 +23,7 @@ const TaskLog = props => {
     const newTasksLog = tasksLog.filter((item, i) => {
       return ind !== i;
     });
-   changeTasksLog(newTasksLog);
+    changeTasksLog(newTasksLog);
   };
 
   return (
@@ -43,7 +43,7 @@ const TaskLog = props => {
         <TableBody>
           {tasksLog.map((item, i) => (
             <TableRow key={i} className={classes.rowTasksLog} hover>
-              <TableCell  className={classes.cellTasksLog}>{i + 1}</TableCell>
+              <TableCell className={classes.cellTasksLog}>{i + 1}</TableCell>
               {Object.keys(item).map((el, j) => (
                 <TableCell key={j} className={classes.cellTasksLog}>
                   {el === fieldsTasksLog.dateStart ||
@@ -52,8 +52,8 @@ const TaskLog = props => {
                     : item[el]}
                 </TableCell>
               ))}
-              <TableCell  className={classes.cellTasksLog}>
-                <Link to={`/tasks/${i+1}`}>
+              <TableCell className={classes.cellTasksLog}>
+                <Link to={`/tasks/${i + 1}`}>
                   <Button
                     size="small"
                     variant="outlined"
@@ -64,7 +64,7 @@ const TaskLog = props => {
                   </Button>
                 </Link>
               </TableCell>
-              <TableCell  className={classes.cellTasksLog}>
+              <TableCell className={classes.cellTasksLog}>
                 <Button
                   size="small"
                   variant="outlined"
@@ -83,7 +83,7 @@ const TaskLog = props => {
   );
 };
 
-const mapStateToProps = ({ tab: { tasksLog } }) => ({tasksLog});
+const mapStateToProps = ({ tab: { tasksLog } }) => ({ tasksLog });
 
 const mapDispatchToProps = {
   changeTasksLog: tab.tasksLog,

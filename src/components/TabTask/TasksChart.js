@@ -1,7 +1,8 @@
 import React from 'react';
-import {connect} from "react-redux";
-import { withStyles } from '@material-ui/core';
-import { stylesTasksChart } from "styles";
+import { connect } from 'react-redux';
+import { withStyles, Button } from '@material-ui/core';
+import { stylesTasksChart } from 'styles';
+import { generate } from 'functions';
 import {
   BarChart,
   Bar,
@@ -11,8 +12,13 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
+import { tab } from 'actions/actionTab';
 
-const TaskChart = ({ dataForChart, classes }) => {
+const TaskChart = ({ dataForChart, classes, changeTasksLog }) => {
+  const handleClickGenerate = () => {
+    changeTasksLog(generate());
+  };
+
   return (
     <div className={classes.root}>
       <BarChart
@@ -28,12 +34,26 @@ const TaskChart = ({ dataForChart, classes }) => {
         <Legend />
         <Bar dataKey="pv" fill="#3450c7" name="Minutes in this hours" />
       </BarChart>
+      <Button
+        size="small"
+        variant="outlined"
+        onClick={handleClickGenerate}
+        color="inherit"
+        className={classes.buttonGenerate}
+      >
+        GENERATE
+      </Button>
     </div>
   );
 };
 
-const mapStateToProps = ({ tab: {dataForChart} }) => ({dataForChart});
+const mapStateToProps = ({ tab: { dataForChart } }) => ({ dataForChart });
+
+const mapDispatchToProps = {
+  changeTasksLog: tab.tasksLog,
+};
 
 export default connect(
   mapStateToProps,
+  mapDispatchToProps
 )(withStyles(stylesTasksChart)(TaskChart));

@@ -18,7 +18,7 @@ export const stylesModalTimer = theme => ({
     padding: theme.spacing.unit * 2,
   },
   taskName: {
-    color: '#1155cc !important'
+    color: '#1155cc !important',
   },
   timer: {
     width: '150px',
@@ -27,7 +27,7 @@ export const stylesModalTimer = theme => ({
     margin: '15px',
     textAlign: 'center',
     lineHeight: '150px',
-    fontSize: '24px'
+    fontSize: '24px',
   },
   modalTitleH2: {
     margin: '20px',
@@ -35,12 +35,12 @@ export const stylesModalTimer = theme => ({
     color: '#c34164',
   },
   modalTitleH3: {
-    margin: '20px'
+    margin: '20px',
   },
   buttonClose: {
     color: '#50cbde',
-    left: '90%'
-  }
+    left: '90%',
+  },
 });
 
 export const stylesTasksLog = theme => ({
@@ -63,19 +63,19 @@ export const stylesTasksLog = theme => ({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     maxWidth: '200px',
-    color: '#1155cc'
+    color: '#1155cc',
   },
   buttonTable: {
     backgroundColor: '#ffffff',
     margin: '10% auto',
-  }
+  },
 });
 
 export const stylesInfo = theme => ({
   button: {
     margin: theme.spacing.unit,
     backgroundColor: '#1155cc',
-    color: '#ffffff'
+    color: '#ffffff',
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
@@ -91,39 +91,44 @@ export const stylesInfo = theme => ({
   },
   table: {
     maxWidth: 900,
-    whiteSpace: 'nowrap'
+    whiteSpace: 'nowrap',
   },
   wrap: {
-    whiteSpace: 'normal'
-  }
+    whiteSpace: 'normal',
+  },
 });
 
-export const stylesApp = theme => ({
+export const stylesMain = theme => ({
   root: {
     padding: '20px',
-  }
+  },
 });
 
 export const stylesTasksChart = theme => ({
   root: {
     overflowX: 'auto',
-    overflowY: 'hidden'
-  }
+    overflowY: 'hidden',
+    textAlign: 'right',
+  },
+  buttonGenerate: {
+    marginTop: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 15,
+  },
 });
 
 export const stylesTab = theme => ({
   root: {
     width: '100%',
-    marginTop: '5%'
+    marginTop: '5%',
   },
   header: {
     backgroundColor: '#48bdd5',
-    boxShadow: 'inherit'
+    boxShadow: 'inherit',
   },
   fieldHeader: {
     maxWidth: '100%',
     flex: '1',
     fontWeight: '700',
-    fontSize: '1rem !important'
+    fontSize: '1rem !important',
   },
 });

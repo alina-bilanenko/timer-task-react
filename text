@@ -1,3 +1,0 @@
-const time = moment().valueOf();
-    console.log(time);
-    console.log(moment(time));

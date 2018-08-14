@@ -4,5 +4,5 @@ import { tab } from 'reducers/tab';
 
 export const reducer = combineReducers({
   timer,
-  tab
+  tab,
 });
