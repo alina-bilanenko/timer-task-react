@@ -72,12 +72,12 @@ export const dataForTaskChart = tasksLog => {
 };
 
 export const countTransformPersist = ({
-  countTimer,
-  buttonText,
-  dateStart,
-}) => {
+                                        countTimer,
+                                        buttonText,
+                                        dateStart,
+                                      }) => {
   if (!buttonText) {
-    return moment.duration(moment() - moment(dateStart)).seconds();
+    return moment.duration(moment() - moment(dateStart)).asSeconds();
   } else return countTimer;
 };
 

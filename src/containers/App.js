@@ -11,14 +11,13 @@ import { ConnectedRouter } from 'connected-react-router';
 class App extends Component {
 
   componentDidMount() {
-    // console.log(this.props.router)
-    // console.log(this.props)
     if (!this.props.timer.buttonText) {
       this.startTimer();
     }
   }
 
   startTimer = () => {
+    if(this.timerInterval) return;
     this.timerInterval = setInterval(() => {
       this.props.setTimer(this.props.timer.countTimer + 1);
     }, 1000);
