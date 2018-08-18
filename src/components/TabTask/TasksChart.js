@@ -1,8 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { withStyles, Button } from '@material-ui/core';
-import { stylesTasksChart } from 'styles';
-import { generate } from 'functions';
+import React from 'react'
+import { connect } from 'react-redux'
+import { withStyles, Button } from '@material-ui/core'
+import { stylesTasksChart } from 'styles'
+import { generate } from 'functions'
 import {
   BarChart,
   Bar,
@@ -10,14 +10,15 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
-} from 'recharts';
-import { tab } from 'actions/actionTab';
+  Legend
+} from 'recharts'
+import { tab } from 'actions/actionTab'
+import PropTypes from 'prop-types'
 
 const TaskChart = ({ dataForChart, classes, changeTasksLog }) => {
   const handleClickGenerate = () => {
-    changeTasksLog(generate());
-  };
+    changeTasksLog(generate())
+  }
 
   return (
     <div className={classes.root}>
@@ -28,32 +29,38 @@ const TaskChart = ({ dataForChart, classes, changeTasksLog }) => {
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid horizontal={false} vertical={false} />
-        <XAxis dataKey="name" />
+        <XAxis dataKey='name' />
         <YAxis ticks={[0, 15, 30, 45, 60]} />
         <Tooltip />
         <Legend />
-        <Bar dataKey="pv" fill="#3450c7" name="Minutes in this hours" />
+        <Bar dataKey='pv' fill='#3450c7' name='Minutes in this hours' />
       </BarChart>
       <Button
-        size="small"
-        variant="outlined"
+        size='small'
+        variant='outlined'
         onClick={handleClickGenerate}
-        color="inherit"
+        color='inherit'
         className={classes.buttonGenerate}
       >
         GENERATE
       </Button>
     </div>
-  );
-};
+  )
+}
 
-const mapStateToProps = ({ tab: { dataForChart } }) => ({ dataForChart });
+const mapStateToProps = ({ tab: { dataForChart } }) => ({ dataForChart })
 
 const mapDispatchToProps = {
-  changeTasksLog: tab.tasksLog,
-};
+  changeTasksLog: tab.tasksLog
+}
+
+TaskChart.propTypes = {
+  dataForChart: PropTypes.array,
+  classes: PropTypes.object,
+  changeTasksLog: PropTypes.func
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(stylesTasksChart)(TaskChart));
+)(withStyles(stylesTasksChart)(TaskChart))

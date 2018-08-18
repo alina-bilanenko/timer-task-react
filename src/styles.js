@@ -1,12 +1,12 @@
-export function getModalStyle() {
-  const top = 50;
-  const left = 50;
+export function getModalStyle () {
+  const top = 50
+  const left = 50
 
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
+    transform: `translate(-${top}%, -${left}%)`
+  }
 }
 
 export const stylesModalTimer = theme => ({
@@ -15,10 +15,10 @@ export const stylesModalTimer = theme => ({
     width: theme.spacing.unit * 100,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 2
   },
   taskName: {
-    color: '#1155cc !important',
+    color: '#1155cc !important'
   },
   timer: {
     width: '150px',
@@ -27,21 +27,21 @@ export const stylesModalTimer = theme => ({
     margin: '15px',
     textAlign: 'center',
     lineHeight: '150px',
-    fontSize: '24px',
+    fontSize: '24px'
   },
   modalTitleH2: {
     margin: '20px',
     marginTop: '10px',
-    color: '#c34164',
+    color: '#c34164'
   },
   modalTitleH3: {
-    margin: '20px',
+    margin: '20px'
   },
   buttonClose: {
     color: '#50cbde',
-    left: '90%',
-  },
-});
+    left: '90%'
+  }
+})
 
 export const stylesTasksLog = theme => ({
   root: {
@@ -49,36 +49,36 @@ export const stylesTasksLog = theme => ({
     marginTop: 0,
     overflowX: 'auto',
     boxShadow: 'inherit',
-    borderRadius: 'inherit',
+    borderRadius: 'inherit'
   },
   table: {
     minWidth: 700,
-    color: '#1155cc',
+    color: '#1155cc'
   },
   rowTasksLog: {
-    backgroundColor: '#eaf6fe',
+    backgroundColor: '#eaf6fe'
   },
   cellTasksLog: {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     maxWidth: '200px',
-    color: '#1155cc',
+    color: '#1155cc'
   },
   buttonTable: {
     backgroundColor: '#ffffff',
-    margin: '10% auto',
-  },
-});
+    margin: '10% auto'
+  }
+})
 
 export const stylesInfo = theme => ({
   button: {
     margin: theme.spacing.unit,
     backgroundColor: '#1155cc',
-    color: '#ffffff',
+    color: '#ffffff'
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   },
   root: {
     ...theme.mixins.gutters(),
@@ -87,48 +87,48 @@ export const stylesInfo = theme => ({
     minWidth: '50%',
     width: '100%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   table: {
     maxWidth: 900,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   wrap: {
-    whiteSpace: 'normal',
-  },
-});
+    whiteSpace: 'normal'
+  }
+})
 
 export const stylesMain = theme => ({
   root: {
-    padding: '20px',
-  },
-});
+    padding: '20px'
+  }
+})
 
 export const stylesTasksChart = theme => ({
   root: {
     overflowX: 'auto',
     overflowY: 'hidden',
-    textAlign: 'right',
+    textAlign: 'right'
   },
   buttonGenerate: {
     marginTop: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 15,
-  },
-});
+    marginRight: theme.spacing.unit * 15
+  }
+})
 
 export const stylesTab = theme => ({
   root: {
     width: '100%',
-    marginTop: '5%',
+    marginTop: '5%'
   },
   header: {
     backgroundColor: '#48bdd5',
-    boxShadow: 'inherit',
+    boxShadow: 'inherit'
   },
   fieldHeader: {
     maxWidth: '100%',
     flex: '1',
     fontWeight: '700',
-    fontSize: '1rem !important',
-  },
-});
+    fontSize: '1rem !important'
+  }
+})

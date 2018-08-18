@@ -1,4 +1,4 @@
-import { dataForTaskChart } from './functions';
+import { dataForTaskChart } from './functions'
 
 export const initialState = {
   timer: {
@@ -6,16 +6,16 @@ export const initialState = {
     buttonText: true,
     taskName: '',
     dateStart: 0,
-    openModal: false,
+    openModal: false
   },
   tab: {
     openTabNumber: 0,
     tasksLog: [],
-    dataForChart: dataForTaskChart([]),
-  },
-};
+    dataForChart: dataForTaskChart([])
+  }
+}
 
 export const tabs = {
   tasksLog: 'tasks-log',
-  tasksChart: 'tasks-chart',
-};
+  tasksChart: 'tasks-chart'
+}

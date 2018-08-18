@@ -1,10 +1,10 @@
-import React from 'react';
-import moment from 'moment/moment';
-import { fieldsTasksLog } from 'constFields';
-import { connect } from 'react-redux';
-import { tab } from 'actions/actionTab';
-import { Link } from 'react-router-dom';
-import { stylesTasksLog } from 'styles';
+import React from 'react'
+import moment from 'moment/moment'
+import { fieldsTasksLog } from 'constFields'
+import { connect } from 'react-redux'
+import { tab } from 'actions/actionTab'
+import { Link } from 'react-router-dom'
+import { stylesTasksLog } from 'styles'
 import {
   withStyles,
   Table,
@@ -13,18 +13,19 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
-} from '@material-ui/core';
+  Button
+} from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 const TaskLog = props => {
-  const { classes, tasksLog, changeTasksLog } = props;
+  const { classes, tasksLog, changeTasksLog } = props
 
   const deleteTaskLog = ind => {
     const newTasksLog = tasksLog.filter((item, i) => {
-      return ind !== i;
-    });
-    changeTasksLog(newTasksLog);
-  };
+      return ind !== i
+    })
+    changeTasksLog(newTasksLog)
+  }
 
   return (
     <Paper className={classes.root}>
@@ -55,9 +56,9 @@ const TaskLog = props => {
               <TableCell className={classes.cellTasksLog}>
                 <Link to={`/tasks/${i + 1}`}>
                   <Button
-                    size="small"
-                    variant="outlined"
-                    color="inherit"
+                    size='small'
+                    variant='outlined'
+                    color='inherit'
                     className={classes.buttonTable}
                   >
                     INFO
@@ -66,10 +67,10 @@ const TaskLog = props => {
               </TableCell>
               <TableCell className={classes.cellTasksLog}>
                 <Button
-                  size="small"
-                  variant="outlined"
+                  size='small'
+                  variant='outlined'
                   onClick={() => deleteTaskLog(i)}
-                  color="inherit"
+                  color='inherit'
                   className={classes.buttonTable}
                 >
                   DELETE
@@ -80,16 +81,22 @@ const TaskLog = props => {
         </TableBody>
       </Table>
     </Paper>
-  );
-};
+  )
+}
 
-const mapStateToProps = ({ tab: { tasksLog } }) => ({ tasksLog });
+const mapStateToProps = ({ tab: { tasksLog } }) => ({ tasksLog })
 
 const mapDispatchToProps = {
-  changeTasksLog: tab.tasksLog,
-};
+  changeTasksLog: tab.tasksLog
+}
+
+TaskLog.propTypes = {
+  classes: PropTypes.object,
+  tasksLog: PropTypes.array,
+  changeTasksLog: PropTypes.func
+}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(stylesTasksLog)(TaskLog));
+)(withStyles(stylesTasksLog)(TaskLog))

@@ -1,6 +1,6 @@
-import moment from "moment/moment";
-import { newTimer } from "./functions";
-import {fieldsTasksLog} from "./constFields";
+import moment from 'moment/moment'
+import { newTimer } from './functions'
+import { fieldsTasksLog } from './constFields'
 
 export const dataForChart = [
   { name: 0, pv: 60 },
@@ -26,18 +26,18 @@ export const dataForChart = [
   { name: 20, pv: 60 },
   { name: 21, pv: 60 },
   { name: 22, pv: 60 },
-  { name: 23, pv: 60 },
-];
+  { name: 23, pv: 60 }
+]
 
 const dateForTest = {
 
   task1: {
-    dateStart: moment().subtract(1, 'days').set({hour: 15, minute: 45, second: 25}),
-    dateEnd: moment().set({hour: 3, minute: 50, second: 50})
+    dateStart: moment().subtract(1, 'days').set({ hour: 15, minute: 45, second: 25 }),
+    dateEnd: moment().set({ hour: 3, minute: 50, second: 50 })
   },
   task2: {
-    dateStart: moment().set({hour: 8, minute: 15, second: 17}),
-    dateEnd: moment().set({hour: 11, minute: 22, second: 50})
+    dateStart: moment().set({ hour: 8, minute: 15, second: 17 }),
+    dateEnd: moment().set({ hour: 11, minute: 22, second: 50 })
   },
   task3: {
     dateStart:  moment().set({ hour: 11, minute: 35, second: 44 }),
@@ -51,7 +51,7 @@ const dateForTest = {
     dateStart:  moment().set({ hour: 20, minute: 0, second: 17 }),
     dateEnd: moment().add(1, 'days').set({ hour: 3, minute: 50, second: 50 })
   }
-};
+}
 
 export const taskLog = [
   {
@@ -61,7 +61,7 @@ export const taskLog = [
     [fieldsTasksLog.countTimer]: newTimer(
       dateForTest.task1.dateStart - dateForTest.task1.dateEnd,
       'ms'
-    ),
+    )
   },
   {
     [fieldsTasksLog.taskName]: 'task 2',
@@ -70,7 +70,7 @@ export const taskLog = [
     [fieldsTasksLog.countTimer]: newTimer(
       dateForTest.task2.dateStart - dateForTest.task2.dateEnd,
       'ms'
-    ),
+    )
   },
   {
     [fieldsTasksLog.taskName]: 'task 3',
@@ -79,15 +79,15 @@ export const taskLog = [
     [fieldsTasksLog.countTimer]: newTimer(
       dateForTest.task3.dateStart - dateForTest.task3.dateEnd,
       'ms'
-    ),
+    )
   },
   {
     [fieldsTasksLog.taskName]: 'task 4',
     [fieldsTasksLog.dateStart]: dateForTest.task4.dateStart.valueOf(),
     [fieldsTasksLog.dateEnd]: dateForTest.task4.dateEnd.valueOf(),
     [fieldsTasksLog.countTimer]: newTimer(
-      dateForTest.task4.dateStart - dateForTest.task4.dateEnd,
-    ),
+      dateForTest.task4.dateStart - dateForTest.task4.dateEnd
+    )
   },
   {
     [fieldsTasksLog.taskName]: 'task 5',
@@ -96,22 +96,22 @@ export const taskLog = [
     [fieldsTasksLog.countTimer]: newTimer(
       dateForTest.task5.dateStart - dateForTest.task5.dateEnd,
       'ms'
-    ),
-  },
-];
+    )
+  }
+]
 
 export const initialStateTimer = {
-    countTimer: 78,
-    buttonText: false,
-    taskName: 'task 1',
-    dateStart: moment().valueOf(),
-    openModal: true,
-};
+  countTimer: 78,
+  buttonText: false,
+  taskName: 'task 1',
+  dateStart: moment().valueOf(),
+  openModal: true
+}
 
 export const initialStateTab = {
   tab: {
     openTabNumber: 1,
     tasksLog: taskLog,
-    dataForChart: dataForChart,
-  },
-};
+    dataForChart: dataForChart
+  }
+}
