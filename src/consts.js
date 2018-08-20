@@ -6,7 +6,8 @@ export const initialState = {
     buttonText: true,
     taskName: '',
     dateStart: 0,
-    openModal: false
+    openModal: false,
+    timerSetInterval: null
   },
   tab: {
     openTabNumber: 0,

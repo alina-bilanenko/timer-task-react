@@ -14,12 +14,20 @@ import PropTypes from 'prop-types'
 
 const ModalTimer = ({
   timer,
-  onClickStop,
-  onClickStart,
+  buttonOnClick,
   onChangeTaskName,
   onChangeCloseModal,
+  onChangeOpenModal,
   classes
 }) => {
+  const changeButton = () => {
+    if (!timer.taskName && !timer.buttonText) {
+      onChangeOpenModal(true)
+    } else {
+      buttonOnClick()
+    }
+  }
+
   return (
     <Grid item xs={12}>
       <Grid
@@ -41,7 +49,7 @@ const ModalTimer = ({
         <Button
           size='small'
           variant='outlined'
-          onClick={timer.buttonText ? onClickStart : onClickStop}
+          onClick={changeButton}
           color='inherit'
         >
           {timer.buttonText ? 'START' : 'STOP'}
@@ -80,11 +88,11 @@ const ModalTimer = ({
 
 ModalTimer.propTypes = {
   timer: PropTypes.object,
-  onClickStop: PropTypes.func,
-  onClickStart: PropTypes.func,
   onChangeTaskName: PropTypes.func,
   onChangeCloseModal: PropTypes.func,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  buttonOnClick: PropTypes.func,
+  onChangeOpenModal: PropTypes.func
 }
 
 export default withStyles(stylesModalTimer)(ModalTimer)

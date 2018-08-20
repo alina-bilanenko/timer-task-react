@@ -75,7 +75,7 @@ export const countTransformPersist = ({
   dateStart
 }) => {
   if (!buttonText) {
-    return moment.duration(moment() - moment(dateStart)).asSeconds()
+    return Math.round(moment.duration(moment() - moment(dateStart)).asSeconds())
   } else return countTimer
 }
 
@@ -147,13 +147,6 @@ export function getStateFromLocalStorage (state) {
     tab: {
       ...newState.tab,
       dataForChart: dataForTaskChart(newState.tab.tasksLog)
-    },
-    router: {
-      ...newState.router,
-      location: {
-        ...newState.router.location,
-        pathname: window.location.pathname
-      }
     }
   }
 }

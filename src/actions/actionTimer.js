@@ -3,7 +3,9 @@ const timerActions = {
   BUTTON_TEXT: 'BUTTON_TEXT',
   TASK_NAME: 'TASK_NAME',
   DATE_START: 'DATE_START',
-  OPEN_MODAL: 'OPEN_MODAL'
+  OPEN_MODAL: 'OPEN_MODAL',
+  TIMER_SET_INTERVAL: 'TIMER_SET_INTERVAL',
+  TIMER_CONTINUE: 'TIMER_CONTINUE'
 }
 
 export const timer = {
@@ -11,9 +13,8 @@ export const timer = {
     type: timerActions.COUNT_TIMER,
     count: value
   }),
-  buttonText: value => ({
-    type: timerActions.BUTTON_TEXT,
-    isStart: value
+  buttonText: () => ({
+    type: timerActions.BUTTON_TEXT
   }),
   taskName: value => ({
     type: timerActions.TASK_NAME,
@@ -26,5 +27,8 @@ export const timer = {
   openModal: value => ({
     type: timerActions.OPEN_MODAL,
     isOpen: value
+  }),
+  timerContinue: () => ({
+    type: timerActions.TIMER_CONTINUE
   })
 }

@@ -21,17 +21,20 @@ const localStorageState = localStorage.getItem('reducer')
   : initialState
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const saveLocalStorage = (reducer) => {
+  return (state, action) => {
+    const result = reducer(state, action)
+    localStorage.setItem('reducer', JSON.stringify(result))
+    return result
+  }
+}
+
 const store = createStore(
-  connectRouter(history)(reducer),
+  connectRouter(history)(saveLocalStorage(reducer)),
   localStorageState,
   composeEnhancers(applyMiddleware(sagaMiddleware, routerMiddleware(history)))
 )
-
-store.subscribe(() => {
-  localStorage.setItem('reducer', JSON.stringify(store.getState()))
-})
-
-store.dispatch({ type: 'INIT_LOAD' })
 
 sagaMiddleware.run(saga)
 

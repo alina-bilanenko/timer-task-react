@@ -7,41 +7,23 @@ import TaskLog from 'components/TabTask/TasksLog'
 import TaskChart from 'components/TabTask/TasksChart'
 import MainPage from 'containers/MainPage'
 import { ConnectedRouter } from 'connected-react-router'
+import PropTypes from 'prop-types'
 
 class App extends Component {
   componentDidMount () {
     if (!this.props.timer.buttonText) {
-      this.startTimer()
+      this.props.timerContinue()
     }
-  }
-
-  startTimer = () => {
-    if (this.timerInterval) return
-    this.timerInterval = setInterval(() => {
-      this.props.setTimer(this.props.timer.countTimer + 1)
-    }, 1000)
-  };
-
-  stopTimer = () => {
-    clearInterval(this.timerInterval)
-  };
-
-  componentWillUnmount () {
-    this.stopTimer()
   }
 
   render () {
-    const timerProps = {
-      stopTimer: this.stopTimer,
-      startTimer: this.startTimer
-    }
-
     return (
       <ConnectedRouter history={this.props.history}>
         <Switch>
           <Route
             path='/timer/:name'
-            render={props => <MainPage {...props} {...timerProps} />}
+            // render={props => <MainPage {...props} {...timerProps} />}
+            component={MainPage}
           />
           <Route exact path='/tasks-log' component={TaskLog} />
           <Route exact path='/tasks-chart' component={TaskChart} />
@@ -62,7 +44,13 @@ const mapStateToProps = ({ timer, tab, router }) => {
 }
 
 const mapDispatchToProps = {
-  setTimer: timer.countTimer
+  timerContinue: timer.timerContinue
+}
+
+App.propTypes = {
+  timer: PropTypes.object,
+  timerContinue: PropTypes.func,
+  history: PropTypes.object
 }
 
 export default connect(
