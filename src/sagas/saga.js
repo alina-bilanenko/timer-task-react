@@ -6,21 +6,9 @@ import moment from 'moment/moment'
 import { fieldsTasksLog } from 'constFields'
 import { delay } from 'redux-saga'
 
-function * taskChartSaga () {
-  yield takeEvery('TASKS_LOG', dispatchDataForChart)
-}
-
 function * dispatchDataForChart (params) {
   const actionTasksLog = yield call(tab.tasksLog, params)
   yield put(tab.dataForChart(dataForTaskChart(actionTasksLog.taskLog.taskLog)))
-}
-
-function * clickButtonSaga () {
-  yield takeEvery('BUTTON_TEXT', changeTypeButton)
-}
-
-function * continueTimer () {
-  yield takeEvery('TIMER_CONTINUE', onClickStart)
 }
 
 function * changeTypeButton () {
@@ -35,10 +23,12 @@ function * changeTypeButton () {
 }
 
 export function * onClickStart () {
-  while (true) {
+  let isStart = yield select(state => state.timer.buttonText)
+  while (!isStart) {
     yield call(delay, 1000)
 
-    const { buttonText: isStart, countTimer: count } = yield select(state => state.timer)
+    const { buttonText, countTimer: count } = yield select(state => state.timer)
+    isStart = buttonText;
 
     if (isStart) break
 
@@ -64,8 +54,8 @@ function * onClickStop () {
 
 export default function * saga () {
   yield all([
-    taskChartSaga(),
-    clickButtonSaga(),
-    continueTimer()
+    yield takeEvery('TASKS_LOG', dispatchDataForChart),
+    yield takeEvery('BUTTON_TEXT', changeTypeButton),
+    yield takeEvery('TIMER_CONTINUE', onClickStart),
   ])
 }
